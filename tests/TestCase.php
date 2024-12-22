@@ -1,36 +1,22 @@
 <?php
-namespace Bmatovu\HelloWorld\Tests;
 
-use Bmatovu\HelloWorld\HelloWorldServiceProvider;
+namespace Bmatovu\HttpLogger\Tests;
+
+use Bmatovu\HttpLogger\HttpLoggerServiceProvider;
+use Illuminate\Foundation\Application;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class TestCase extends Orchestra
 {
     /**
-     * Add package service provider.
+     * @param Application $app
      *
-     * @param \Illuminate\Foundation\Application $app
-     *
-     * @return array
+     * @return array<int, class-string>
      */
     protected function getPackageProviders($app)
     {
         return [
-            HelloWorldServiceProvider::class,
-        ];
-    }
-
-    /**
-     * Get package aliases.
-     *
-     * @param \Illuminate\Foundation\Application $app
-     *
-     * @return array
-     */
-    protected function getPackageAliases($app)
-    {
-        return [
-            'HelloWorld' => 'Bmatovu\HelloWorld\HelloWorldFacade',
+            HttpLoggerServiceProvider::class,
         ];
     }
 }

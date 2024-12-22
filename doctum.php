@@ -1,13 +1,13 @@
 <?php
 
-require __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 use Doctum\Doctum;
 use Doctum\RemoteRepository\GitHubRemoteRepository;
 use Doctum\Version\GitVersionCollection;
 use Symfony\Component\Finder\Finder;
 
-$dir = __DIR__.'/src';
+$dir = __DIR__ . '/src';
 
 $iterator = Finder::create()
     ->files()
@@ -20,7 +20,7 @@ $versions = GitVersionCollection::create($dir)
     ->add('master', 'Master branch');
 
 $repo = new GitHubRemoteRepository(
-    'mtvbrianking/laravel-package-boilerplate',
+    'mtvbrianking/laravel-http-logger',
     dirname($dir),
     'https://github.com/'
 );
@@ -28,9 +28,9 @@ $repo = new GitHubRemoteRepository(
 $options = [
     'theme' => 'default',
     'versions' => $versions,
-    'title' => 'Laravel Package Boilerplate',
-    'build_dir' => __DIR__.'/docs',
-    'cache_dir' => __DIR__.'/docs/cache',
+    'title' => 'Laravel HTTP Logger',
+    'build_dir' => __DIR__ . '/docs',
+    'cache_dir' => __DIR__ . '/docs/cache',
     'remote_repository' => $repo,
     'default_opened_level' => 3,
 ];

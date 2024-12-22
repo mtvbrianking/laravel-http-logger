@@ -1,66 +1,70 @@
 {
-  "name": "bmatovu/laravel-package-boilerplate",
-  "description": "Laravel package boilerplate.",
-  "homepage": "https://github.com/mtvbrianking/laravel-package-boilerplate",
-  "type": "project",
-  "license": "MIT",
-  "keywords": [
-    "laravel",
-    "lumen",
-    "package",
-    "development",
-    "starter",
-    "boilerplate"
-  ],
-  "authors": [
-    {
-      "name": "Brian Matovu",
-      "email": "mtvbrianking@gmail.com",
-      "homepage": "http://bmatovu.com",
-      "role": "Developer"
+    "name": "bmatovu/laravel-http-logger",
+    "description": "Laravel HTTP Logger",
+    "homepage": "https://github.com/mtvbrianking/laravel-http-logger",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "package",
+        "api",
+        "http",
+        "guzzle",
+        "logger"
+    ],
+    "authors": [
+        {
+            "name": "Brian Matovu",
+            "email": "mtvbrianking@gmail.com",
+            "homepage": "https://bmatovu.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "guzzlehttp/guzzle": "^7.5",
+        "illuminate/container": "^10.0|^11.0",
+        "illuminate/http": "^10.0|^11.0",
+        "illuminate/log": "^10.0|^11.0",
+        "illuminate/support": "^10.0|^11.0",
+        "monolog/monolog": "^3.0",
+        "symfony/http-foundation": "^6.4|^7.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "orchestra/testbench": "^8.0|^9.0",
+        "phpunit/phpunit": "^10.0|^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bmatovu\\HttpLogger\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bmatovu\\HttpLogger\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "cs-fix": "php-cs-fixer fix",
+        "cs-lint": "php-cs-fixer fix --dry-run",
+        "docs": "php doctum.phar update doctum.php",
+        "test": "phpunit",
+        "test-coverage": "phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Bmatovu\\HttpLogger\\HttpLoggerServiceProvider"
+            ]
+        }
     }
-  ],
-  "require": {
-    "php": "^7.2.5|^8.0",
-    "illuminate/support": "^6.0|^7.0|^8.0"
-  },
-  "require-dev": {
-    "code-lts/doctum": "^5.3",
-    "friendsofphp/php-cs-fixer": "^2.18",
-    "illuminate/container": "^6.0|^7.0|^8.0",
-    "orchestra/testbench": "^4.0|^5.0|^6.0",
-    "phpunit/phpunit": "^8.0|^9.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "Bmatovu\\HelloWorld\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Bmatovu\\HelloWorld\\Tests\\": "tests/"
-    }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "scripts": {
-    "cs-fix": "php-cs-fixer fix",
-    "cs-lint": "php-cs-fixer fix --dry-run",
-    "doc": "doctum.php update doctum.php",
-    "test": "phpunit",
-    "test-coverage": "phpunit --coverage-html coverage"
-  },
-  "config": {
-    "sort-packages": true
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Bmatovu\\HelloWorld\\HelloWorldServiceProvider"
-      ],
-      "aliases": {
-        "HelloWorld": "Bmatovu\\HelloWorld\\HelloWorldFacade"
-      }
-    }
-  }
 }

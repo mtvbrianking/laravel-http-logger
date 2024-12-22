@@ -1,8 +1,10 @@
 .idea
-.php_cs.cache
-.phpunit.result.cache
+*.bak
+*.cache
+*.phar
 composer.lock
 coverage
 coverage.clover
 docs
 vendor
+todo.md
