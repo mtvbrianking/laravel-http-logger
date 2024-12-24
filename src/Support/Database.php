@@ -17,13 +17,13 @@ class Database
             // $bindings = implode(", ", $query->bindings); // format the bindings as string
             // Log::debug("Sql: $query->sql\nBindings: $bindings\nTime: $query->time\nFile: {$location['file']}\nLine: {$location['line']}");
 
-            $sql = $this->interpolateQuery($query->sql, $query->bindings);
+            $sql = self::interpolateQuery($query->sql, $query->bindings);
 
             Log::debug("[SQL {$query->time}ms] \"{$sql};\" {$location['file']}:{$location['line']}");
         });
     }
 
-    protected function interpolateQuery($query, $bindings)
+    protected static function interpolateQuery($query, $bindings)
     {
         $keys = array();
         $values = $bindings;
