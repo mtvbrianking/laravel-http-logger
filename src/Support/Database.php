@@ -12,9 +12,9 @@ class Database
         DB::listen(function ($query) {
             $location = collect(debug_backtrace())->filter(function ($trace) {
                 return isset($trace['file']) && !str_contains($trace['file'], 'vendor/');
-            })->first(); // grab the first element of non vendor/ calls
+            })->first();
 
-            // $bindings = implode(", ", $query->bindings); // format the bindings as string
+            // $bindings = implode(", ", $query->bindings);
             // Log::debug("Sql: $query->sql\nBindings: $bindings\nTime: $query->time\nFile: {$location['file']}\nLine: {$location['line']}");
 
             $sql = self::interpolateQuery($query->sql, $query->bindings);
@@ -23,31 +23,42 @@ class Database
         });
     }
 
-    protected static function interpolateQuery($query, $bindings)
+    protected static function interpolateQuery(string $query, array $bindings)
     {
-        $keys = array();
-        $values = $bindings;
+        $keys = $values = [];
 
-        # build a regular expression for each parameter
         foreach ($bindings as $key => $value) {
             if (is_string($key)) {
                 $keys[] = '/:' . $key . '/';
-            } else {
-                $keys[] = '/[?]/';
             }
 
             if ($value instanceof \DateTime) {
                 $values[$key] = $value->format('\'Y-m-d H:i:s\'');
+                continue;
             }
 
-            if (is_string($value))
-                $values[$key] = "'" . $value . "'";
+            if (is_numeric($value)) {
+                $values[$key] = $value;
+                continue;
+            }
 
-            if (is_array($value))
-                $values[$key] = "'" . implode("','", $value) . "'";
+            if (is_array($value)) {
+                $values[$key] = "'" . implode("', '", $value) . "'";
+                continue;
+            }
 
-            if (is_null($value))
+            if (is_null($value)) {
                 $values[$key] = 'NULL';
+                continue;
+            }
+
+            $values[$key] = "'" . $value . "'";
+        }
+
+        if (empty($keys)) {
+            return preg_replace_callback('/[?]/', function ($matches) use (&$values) {
+                return array_shift($values);
+            }, $query);
         }
 
         return preg_replace($keys, $values, $query);
