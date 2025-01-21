@@ -31,7 +31,7 @@ class GuzzleHttp
 
         $logger = Container::getInstance()->get('log');
 
-        $level = config('app.debug') ? 'debug' : 'info';
+        $level = config('log.level') ? 'debug' : 'info';
 
         collect($messageFormats[$level])->each(static function ($format) use ($logger, $level, $handlerStack) {
             $messageFormatter = new MessageFormatter($format);
