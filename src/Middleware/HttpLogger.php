@@ -47,7 +47,7 @@ class HttpLogger
 
         $response = $next($request);
 
-        $response?->header('X-Request-Id', $this->getRequestId());
+        $response?->headers->set('X-Request-Id', $this->getRequestId());
 
         return $response;
     }
